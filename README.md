@@ -220,4 +220,34 @@ En MariaDB no estan soportados los tablespaces, como vemos al final de esta imag
 ### 9. Averigua si existe el concepto de índice en MongoDB y las diferencias con los índices de ORACLE. Explica los distintos tipos de índice que ofrece MongoDB.
 
 
+Los índices en MongoDB se generan en forma de árbol, esto incrementa la velocidad a la hora de realizar consultas. Hay varios tipos de índices:
 
+- Simples: Este tipo se aplica a un solo campo de nuestra colección. Ejemplo:
+
+~~~
+db.users.ensureIndex( { "codigo" : 1 } ) 
+
+#El 1 indica orden ascendente y el -1 descendente.
+~~~
+
+- Compuestos: Este tipo se aplica sobre varios campos de nuestra colección. Ejemplo:
+
+~~~
+db.users.ensureIndex( { "nombre" : 1, "edad":-1 } ) 
+~~~
+
+Lo bueno de estos índices es que podemos consultar varios campos sin la necesidad de incluirlos todos.
+
+- Únicos: Con este índice conseguimos que un índice simple o compuesto este obligado a contener valores únicos. Ejemplo:
+
+~~~
+db.users.ensureIndex( { "codigo" : 1 }, {"unique":true} )
+~~~
+
+- Sparse: Normalmente un índice incluye todos los documentos, incluso los valores null. Con esta opción hacemos que un índice no incluya dichos documentos. Ejemplo:
+
+~~~
+db.users.ensureIndex( { "nombre" : 1 }, {"sparse":true} )
+~~~
+
+- Multikey
