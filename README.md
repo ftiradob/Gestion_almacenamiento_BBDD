@@ -14,7 +14,7 @@ Para ver de que forma estan gestionadas las extensiones, hacemos la siguiente co
 
 ![localoracle](img/localoracle.png)
 
-Las extensiones estan gestionadas localmente. La posibilidad de gestionar por diccionario solo se da en el almacenamiento en un tablespace, aunque sigue dando mejor rendimiento localmente.
+Las extensiones estan gestionadas localmente. La gestión de las extensiones se elige en la instalación de Oracle y no se puede cambiar una vez elegida.
 
 ### 2. Usa la vista del diccionario de datos v$datafile para mirar cuando fue la última vez que se ejecutó el proceso CKPT en tu base de datos.
 
@@ -36,10 +36,8 @@ SQL> CREATE TABLESPACE TS1 DATAFILE '/home/oracle/TS1.img' SIZE 2M AUTOEXTEND ON
 Tablespace creado.
 ~~~
 
-No, pero para gestionar el almacenamiento en un tablespace si que existe la posibilidad de hacerlo en diccionario.
-
-El almacenamiento en un tablespace se puede gestionar por diccionario o localmente (en el propio tablespace). Esta última fórmula da mejor rendimiento, pero se ignora la claúsula STORAGE de los objetos del tablespace.
-
+No, la gestión de extensiones se elige en la instalación de Oracle y luego no puede cambiarse. 
+La gestión local da mejor rendimiento, pero se ignora la claúsula STORAGE de los objetos del tablespace.
 
 ### 4. Averigua el tamaño de un bloque de datos en tu base de datos. Cámbialo al doble del valor que tenga.
 
@@ -219,6 +217,7 @@ En MariaDB no estan soportados los tablespaces, como vemos al final de esta imag
 
 ### 9. Averigua si existe el concepto de índice en MongoDB y las diferencias con los índices de ORACLE. Explica los distintos tipos de índice que ofrece MongoDB.
 
+Los índices en Oracle guardan parejas de elementos: el elemento que se desea indexar y su posición en la base de datos. Oracle buscará en el índice del elemento indexado que queramos para devolver el registro que se en cuentre en la posición marcada por el índice.
 
 Los índices en MongoDB se generan en forma de árbol, esto incrementa la velocidad a la hora de realizar consultas. Hay varios tipos de índices:
 
@@ -227,7 +226,7 @@ Los índices en MongoDB se generan en forma de árbol, esto incrementa la veloci
 ~~~
 db.users.ensureIndex( { "codigo" : 1 } ) 
 
-#El 1 indica orden ascendente y el -1 descendente.
+# El 1 indica orden ascendente y el -1 descendente.
 ~~~
 
 - Compuestos: Este tipo se aplica sobre varios campos de nuestra colección. Ejemplo:
@@ -250,4 +249,10 @@ db.users.ensureIndex( { "codigo" : 1 }, {"unique":true} )
 db.users.ensureIndex( { "nombre" : 1 }, {"sparse":true} )
 ~~~
 
-- Multikey
+- Multikey: Permite crear índices sobre elementos almacenados en arrays y se realiza automáticamente cuando creamos un índice. Ejemplo:
+
+~~~
+Colección: { codigo: 5, nombre: "fernando", notas: [ 5, 8, 9 ] }
+
+db.users.ensureIndex( { "notas" : 1 } )
+~~~
