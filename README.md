@@ -13,7 +13,7 @@ Para mostrar lo pedido realizamos la siguiente consulta:
 Para ver de que forma estan gestionadas las extensiones, hacemos la siguiente consulta:
 
 
-![localoracle](img/localoracle.png)
+![localoracle](img/local.png)
 
 Las extensiones estan gestionadas localmente. La gestión de las extensiones se elige en la instalación de Oracle y no se puede cambiar una vez elegida.
 
