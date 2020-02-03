@@ -6,7 +6,8 @@
 
 Para mostrar lo pedido realizamos la siguiente consulta:
 
-![unoracle](img/unoracle.png)
+
+![unoracle](img/ejer1oracle.png)
 
 
 Para ver de que forma estan gestionadas las extensiones, hacemos la siguiente consulta:
