@@ -241,7 +241,7 @@ CREATE [UNDO] TABLESPACE tablespace_name
 
 Los índices en Oracle guardan parejas de elementos: el elemento que se desea indexar y su posición en la base de datos. Oracle buscará en el índice del elemento indexado que queramos para devolver el registro que se en cuentre en la posición marcada por el índice.
 
-Los índices en MongoDB se generan en forma de árbol, esto incrementa la velocidad a la hora de realizar consultas. Hay varios tipos de índices:
+Los índices en MongoDB se generan en forma de árbol, esto incrementa la velocidad a la hora de realizar consultas. Hay varios tipos de índices, los más importantes son:
 
 - Simples: Este tipo se aplica a un solo campo de nuestra colección. Ejemplo:
 
