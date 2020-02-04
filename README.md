@@ -217,6 +217,23 @@ En MariaDB no estan soportados los tablespaces, como vemos al final de esta imag
 
 ![noexistetablespace](img/noexistetablespace.png)
 
+En cambio, en MYSQL si que estan soportados, pero solo pueden añadirse las cláusulas de almacenamiento mediante el motor de almacenamiento NDB. La sintaxis con las opciones es la siguiente:
+
+~~~
+CREATE [UNDO] TABLESPACE tablespace_name
+
+  # NDB:
+    USE LOGFILE GROUP logfile_group
+    [ADD DATAFILE 'file_name']
+    [EXTENT_SIZE [=] extent_size]
+    [INITIAL_SIZE [=] initial_size]
+    [AUTOEXTEND_SIZE [=] autoextend_size]
+    [MAX_SIZE [=] max_size]
+    [NODEGROUP [=] nodegroup_id]
+    [WAIT]
+    [COMMENT [=] 'string']
+    [ENGINE [=] engine_name]
+~~~
 
 ## MONGODB
 
