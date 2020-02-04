@@ -142,7 +142,11 @@ is
 	and max_bytes = '-1'
 	and max_blocks = '-1'
 	group by username
-	having count(tablespace_name) > 1;
+	having count(tablespace_name) > 1
+	UNION
+	select grantee
+	from DBA_SYS_PRIVS
+	where privilege = 'UNLIMITED TABLESPACE';
 
 begin
 	dbms_output.put_line(chr(10)||'USUARIOS'||chr(10)||'--------');
@@ -157,7 +161,7 @@ end;
 Lo probamos:
 
 
-![quotasoracle](img/quotasoracle.png)
+![quotasoracle](img/proceora2.png)
 
        
 ## POSTGRESQL
@@ -199,12 +203,12 @@ En las tablas si pueden establecerse cláusulas de almacenamiento, las más impo
 
 ~~~
   | [STORAGE] ENGINE [=] nombre_motor
-  | AUTO_INCREMENT [=] valor #Activar el crecimiento automático
+  | AUTO_INCREMENT [=] valor 					#Activar el crecimiento automático
   | DATA DIRECTORY [=] 'ruta absoluta al directorio'
   | INDEX DIRECTORY [=] 'ruta absoluta al directorio'
-  | ENCRYPTED [=] {YES | NO} #Opción de encriptar
-  | MAX_ROWS [=] valor #Determina el máximo número de registros
-  | MIN_ROWS [=] valor #Determina el mínimo número de registros
+  | ENCRYPTED [=] {YES | NO} 					#Opción de encriptar
+  | MAX_ROWS [=] valor 						#Determina el máximo número de registros
+  | MIN_ROWS [=] valor 						#Determina el mínimo número de registros
   | ROW_FORMAT [=] {DEFAULT|DYNAMIC|FIXED|COMPRESSED|REDUNDANT|COMPACT|PAGE} #Formato de registro
 ~~~
 
